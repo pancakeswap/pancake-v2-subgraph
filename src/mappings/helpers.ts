@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { log, BigInt, BigDecimal, Address, EthereumEvent } from '@graphprotocol/graph-ts'
+import { log, BigInt, BigDecimal, Address, ethereum } from '@graphprotocol/graph-ts'
 import { ERC20 } from '../types/Factory/ERC20'
 import { ERC20SymbolBytes } from '../types/Factory/ERC20SymbolBytes'
 import { ERC20NameBytes } from '../types/Factory/ERC20NameBytes'
@@ -7,7 +7,7 @@ import { User, Bundle, Token, LiquidityPosition, LiquidityPositionSnapshot, Pair
 import { Factory as FactoryContract } from '../types/templates/Pair/Factory'
 
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
-export const FACTORY_ADDRESS = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f'
+export const FACTORY_ADDRESS = '0xBCfCcbde45cE874adCB698cC183deBcF17952812'
 
 export let ZERO_BI = BigInt.fromI32(0)
 export let ONE_BI = BigInt.fromI32(1)
@@ -54,14 +54,6 @@ export function isNullEthValue(value: string): boolean {
 }
 
 export function fetchTokenSymbol(tokenAddress: Address): string {
-  // hard coded overrides
-  if (tokenAddress.toHexString() == '0xe0b7927c4af23765cb51314a0e0521a9645f0e2a') {
-    return 'DGD'
-  }
-  if (tokenAddress.toHexString() == '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9') {
-    return 'AAVE'
-  }
-
   let contract = ERC20.bind(tokenAddress)
   let contractSymbolBytes = ERC20SymbolBytes.bind(tokenAddress)
 
@@ -84,14 +76,6 @@ export function fetchTokenSymbol(tokenAddress: Address): string {
 }
 
 export function fetchTokenName(tokenAddress: Address): string {
-  // hard coded overrides
-  if (tokenAddress.toHexString() == '0xe0b7927c4af23765cb51314a0e0521a9645f0e2a') {
-    return 'DGD'
-  }
-  if (tokenAddress.toHexString() == '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9') {
-    return 'Aave Token'
-  }
-
   let contract = ERC20.bind(tokenAddress)
   let contractNameBytes = ERC20NameBytes.bind(tokenAddress)
 
@@ -124,11 +108,6 @@ export function fetchTokenTotalSupply(tokenAddress: Address): BigInt {
 }
 
 export function fetchTokenDecimals(tokenAddress: Address): BigInt {
-  // hardcode overrides
-  if (tokenAddress.toHexString() == '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9') {
-    return BigInt.fromI32(18)
-  }
-
   let contract = ERC20.bind(tokenAddress)
   // try types uint8 for decimals
   let decimalValue = null
@@ -168,7 +147,7 @@ export function createUser(address: Address): void {
   }
 }
 
-export function createLiquiditySnapshot(position: LiquidityPosition, event: EthereumEvent): void {
+export function createLiquiditySnapshot(position: LiquidityPosition, event: ethereum.Event): void {
   let timestamp = event.block.timestamp.toI32()
   let bundle = Bundle.load('1')
   let pair = Pair.load(position.pair)
