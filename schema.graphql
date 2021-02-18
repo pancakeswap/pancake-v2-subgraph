@@ -84,8 +84,6 @@ type Pair @entity {
   createdAtTimestamp: BigInt!
   createdAtBlockNumber: BigInt!
 
-  # Fields used to help derived relationship
-  liquidityProviderCount: BigInt! # used to detect new exchanges
   # derived fields
   pairHourData: [PairHourData!]! @derivedFrom(field: "pair")
   mints: [Mint!]! @derivedFrom(field: "pair")
