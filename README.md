@@ -44,7 +44,7 @@ These contain specifc information about a transaction. Things like which pair tr
 
 ### Querying Aggregated PancakeSwap Data
 
-This query fetches aggredated data from all uniswap pairs and tokens, to give a view into how much activity is happening within the whole protocol.
+This query fetches aggregated data from all Pancakeswap pairs and tokens, to capture activity throughout the entire protocol.
 
 ```graphql
 {
