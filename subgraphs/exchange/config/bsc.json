@@ -1,5 +1,5 @@
 {
-    "network": "Binance Smart Chain",
-    "address": "0xc35dadb65012ec5796536bd9864ed8773abc74c4",
-    "startBlock": "5205069"
+    "network": "bsc",
+    "address": "0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F",
+    "startBlock": "586899"
 }

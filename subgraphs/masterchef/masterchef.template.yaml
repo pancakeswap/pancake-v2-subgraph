@@ -1,6 +1,6 @@
 specVersion: 0.0.3
 description: Masterchef
-repository: https://github.com/sushiswap/sushiswap-subgraph
+repository: https://github.com/pancakeswap/pancake-v2-subgraph
 schema:
   file: ./masterchef.graphql
 dataSources:
@@ -23,13 +23,13 @@ dataSources:
         - User
       abis:
         - name: MasterChef
-          file: ../../node_modules/@sushiswap/core/build/abi/MasterChef.json
+          file: ../../packages/abis/masterchef.json
         - name: Factory
-          file: ../../node_modules/@sushiswap/core/build/abi/UniswapV2Factory.json
+          file: ../../packages/abis/factory.json
         - name: Pair
-          file: ../../node_modules/@sushiswap/core/build/abi/UniswapV2Pair.json
+          file: ../../packages/abis/pair.json
         - name: ERC20
-          file: ../../node_modules/@sushiswap/core/build/abi/ERC20.json
+          file: ../../packages/abis/erc20.json
       eventHandlers:
         - event: Deposit(indexed address,indexed uint256,uint256)
           handler: deposit

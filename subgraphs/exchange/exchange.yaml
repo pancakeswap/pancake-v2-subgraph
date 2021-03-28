@@ -1,16 +1,16 @@
 specVersion: 0.0.3
 description: Exchange
-repository: https://github.com/sushiswap/sushiswap-subgraph
+repository: https://github.com/pancakeswap/pancake-v2-subgraph
 schema:
   file: ./exchange.graphql
 dataSources:
   - kind: ethereum/contract
     name: Factory
-    network: mainnet
+    network: bsc
     source:
-      address: '0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac'
+      address: '0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F'
       abi: Factory
-      startBlock: 10794229
+      startBlock: 586899
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -20,13 +20,13 @@ dataSources:
         - Factory
       abis:
         - name: Factory
-          file: ../../node_modules/@sushiswap/core/build/abi/UniswapV2Factory.json
+          file: ../../packages/abis/factory.json
         - name: Pair
-          file: ../../node_modules/@sushiswap/core/build/abi/UniswapV2Pair.json
-        - name: SushiToken
-          file: ../../node_modules/@sushiswap/core/build/abi/SushiToken.json
+          file: ../../packages/abis/pair.json
+        - name: CakeToken
+          file: ../../packages/abis/cakeToken.json
         - name: ERC20
-          file: ../../node_modules/@sushiswap/core/build/abi/ERC20.json
+          file: ../../packages/abis/erc20.json
         - name: ERC20SymbolBytes
           file: ../../packages/abis/ERC20SymbolBytes.json
         - name: ERC20NameBytes
@@ -37,7 +37,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Pair
-    network: mainnet
+    network: bsc
     source:
       abi: Pair
     mapping:
@@ -59,9 +59,9 @@ templates:
         - User
       abis:
         - name: Pair
-          file: ../../node_modules/@sushiswap/core/build/abi/UniswapV2Pair.json
+          file: ../../packages/abis/pair.json
         - name: Factory
-          file: ../../node_modules/@sushiswap/core/build/abi/UniswapV2Factory.json
+          file: ../../packages/abis/factory.json
       eventHandlers:
         - event: Mint(indexed address,uint256,uint256)
           handler: onMint
