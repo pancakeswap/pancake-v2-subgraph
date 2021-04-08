@@ -1,4 +1,6 @@
-# PancakeSwap v2 Subgraph
+# PancakeSwap V2 Subgraph
+
+# This repository is archived, you can find all the PancakeSwawp subgraph at [pancakeswap/pancake-subgraph](https://github.com/pancakeswap/pancake-subgraph)
 
 [PancakeSwap](https://pancakeswap.finance/) is a decentralized protocol for automated token exchange on Binance Smart Chain.
 
