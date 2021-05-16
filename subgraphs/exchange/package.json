@@ -1,0 +1,18 @@
+{
+    "name": "exchange",
+    "license": "MIT",
+    "version": "1.0.0",
+    "author": "codingsh<codingsh@pm>",
+    "files": [
+        "generated"
+    ],
+    "scripts": {
+        "codegen": "graph codegen exchange.yaml",
+        "build": "graph build exchange.yaml",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ pancakeswap/exchange exchange.yaml",
+        "create-local": "graph create --node http://localhost:8020/ /pacakeswap/pacakeswap",
+        "remove-local": "graph remove --node http://localhost:8020/ /pacakeswap/pacakeswap",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /pancakeswap/pancakeswap",
+        "prepare:bsc": "mustache config/bsc.json exchange.template.yaml > exchange.yaml"
+    }
+}

@@ -1,0 +1,75 @@
+specVersion: 0.0.3
+description: Exchange
+repository: https://github.com/pacakeswap/pacakeswap-subgraph
+schema:
+  file: ./exchange.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Factory
+    network: {{ network }}
+    source:
+      address: '{{ address }}'
+      abi: Factory
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/exchange/mappings/factory.ts
+      entities:
+        - Factory
+      abis:
+        - name: Factory
+          file: ../../packages/abis/factory.json
+        - name: Pair
+          file: ../../packages/abis/pair.json
+        - name: CakeToken
+          file: ../../packages/abis/cakeToken.json
+        - name: ERC20
+          file: ../../packages/abis/erc20.json
+        - name: ERC20SymbolBytes
+          file: ../../packages/abis/ERC20SymbolBytes.json
+        - name: ERC20NameBytes
+          file: ../../packages/abis/ERC20NameBytes.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,address,uint256)
+          handler: onPairCreated
+templates:
+  - kind: ethereum/contract
+    name: Pair
+    network: {{ network }}
+    source:
+      abi: Pair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/exchange/mappings/pair.ts
+      entities:
+        - Bundle
+        - Burn
+        - LiquidityPosition
+        - LiquidityPositionSnapshot
+        - Mint
+        - Pair
+        - Swap
+        - Sync
+        - Token
+        - Transaction
+        - User
+      abis:
+        - name: Pair
+          file: ../../packages/abis/pair.json
+        - name: Factory
+          file: ../../packages/abis/factory.json
+      eventHandlers:
+        - event: Mint(indexed address,uint256,uint256)
+          handler: onMint
+        - event: Burn(indexed address,uint256,uint256,indexed address)
+          handler: onBurn
+        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+          handler: onSwap
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: onTransfer
+        - event: Sync(uint112,uint112)
+          handler: onSync

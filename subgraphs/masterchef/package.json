@@ -1,0 +1,16 @@
+{
+    "name": "masterchef",
+    "license": "MIT",
+    "version": "1.0.0",
+    "author": "SushiSwap",
+    "scripts": {
+        "codegen": "graph codegen masterchef.yaml",
+        "build": "graph build masterchef.yaml",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ sushiswap/masterchef masterchef.yaml",
+        "create-local": "graph create --node http://localhost:8020/ /pacakeswap/pacakeswap",
+        "remove-local": "graph remove --node http://localhost:8020/ /pacakeswap/pacakeswap",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /pacakeswap/pacakeswap",
+        "prepare:bsc": "mustache config/bsc.json masterchef.template.yaml > masterchef.yaml",
+        "prepare:bsc-testnet": "mustache config/bsc-testnet.json masterchef.template.yaml > masterchef.yaml"
+    }
+}
